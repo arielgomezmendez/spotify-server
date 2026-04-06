@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const express = require("express");
 const routerApi = require("./routes");
@@ -7,10 +7,17 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+const cors = require("cors");
 
-app.get("/", (req,res)=>{
-    res.send("Hello world")
-})
+app.use(
+  cors({
+    origin: "http://localhost:5173", // frontend
+  }),
+);
+
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
 
 routerApi(app);
 
