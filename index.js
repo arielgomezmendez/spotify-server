@@ -11,7 +11,10 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend
+    origin: [
+      "http://localhost:5173", // frontend in local
+      "https://metal-bands-app-prtz.vercel.app/" // frontend in production(Vercel)
+    ],
   }),
 );
 
