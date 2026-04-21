@@ -4,6 +4,8 @@ const router = express.Router();
 
 const bands = require("../data/bands");
 
+const normalizeText = (text) => text.toLowerCase().trim();
+
 router.get("/", async (req, res) => {
   try {
     const randomBand = bands[Math.floor(Math.random() * bands.length)];
@@ -21,16 +23,22 @@ router.get("/", async (req, res) => {
       return res.status(500).json({ error: "Invalid response from Deezer" });
     }
     //Filter the tracks with preview prop and get a new clean array of tracks.
+    // Filter the bands name to get the expected name
     const tracks = data.data
-      .filter((track) => track.preview)
-      .map((track) => ({
-        id: track?.id,
-        title: track?.title,
-        preview: track?.preview || null,
-        artistName: track?.artist?.name,
-        duration: track?.duration,
-      }));
+      .filter((track) => {
+        const hasPreview = !!track.preview;
+        const artistName = normalizeText(track?.artist?.name || "");
+        const expectedBand = normalizeText(randomBand);
 
+        return hasPreview && artistName === expectedBand;
+      })
+      .map((track) => ({
+        id: track.id,
+        title: track.title,
+        preview: track.preview,
+        artistName: track.artist.name,
+        duration: track.duration,
+      }));
     res.status(200).json(tracks);
   } catch (error) {
     console.error("Error fetching the data from Deezer");
