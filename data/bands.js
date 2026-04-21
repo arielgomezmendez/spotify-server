@@ -1,0 +1,88 @@
+const bands = [
+  // Clásicos
+  "Metallica",
+  "Iron Maiden",
+  "Judas Priest",
+  "Black Sabbath",
+  "Deep Purple",
+  "Led Zeppelin",
+  "Motorhead",
+  "Dio",
+  "Rainbow",
+  "Scorpions",
+  "UFO",
+
+  // Thrash metal
+  "Megadeth",
+  "Slayer",
+  "Anthrax",
+  "Exodus",
+  "Testament",
+  "Kreator",
+  "Sepultura",
+  "Overkill",
+
+  // Heavy / Power
+  "Helloween",
+  "Blind Guardian",
+  "Manowar",
+  "HammerFall",
+  "Sabaton",
+  "Gamma Ray",
+  "Iced Earth",
+  // Death metal
+  "Death",
+  "Cannibal Corpse",
+  "Morbid Angel",
+  "Obituary",
+  "Deicide",
+  "Behemoth",
+  "Carcass",
+  "Entombed",
+  // Black metal
+  "Mayhem",
+  "Darkthrone",
+  "Emperor",
+  "Immortal",
+  "Burzum",
+  "Gorgoroth",
+  "Dimmu Borgir",
+  // Groove / modern
+  "Pantera",
+  "Lamb of God",
+  "Machine Head",
+  "Gojira",
+  "DevilDriver",
+  "Fear Factory",
+  // Nu metal
+  "Slipknot",
+  "Korn",
+  "System of a Down",
+  "Linkin Park",
+  "Deftones",
+  "Disturbed",
+  // Prog / experimental
+  "Dream Theater",
+  "Opeth",
+  "Tool",
+  "Meshuggah",
+  "Porcupine Tree",
+  // Alternative / industrial
+  "Nine Inch Nails",
+  "Rammstein",
+  "Marilyn Manson",
+  "Alice in Chains",
+  "Soundgarden",
+  // Otros importantes
+  "Avenged Sevenfold",
+  "Trivium",
+  "Killswitch Engage",
+  "Bullet for My Valentine",
+  "Ghost",
+  "Volbeat",
+  "Nightwish",
+  "Epica",
+  "Within Temptation",
+];
+
+module.exports = bands;
