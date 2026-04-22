@@ -13,6 +13,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", // frontend in local
+      "https://metal-bands-app.vercel.app",
       "https://metal-bands-app-prtz.vercel.app" // frontend in production(Vercel)
     ],
   }),
