@@ -3,12 +3,16 @@ const express = require("express");
 const router = express.Router();
 
 const bands = require("../data/bands");
+const { generateBandOptions } = require("../utils/utils");
 
 const normalizeText = (text) => text.toLowerCase().trim();
 
 router.get("/", async (req, res) => {
   try {
-    const randomBand = bands[Math.floor(Math.random() * bands.length)];
+    const randomBand = bands[Math.floor(Math.random() * bands.length)]; //Get a random band name.
+    const bandOptions = generateBandOptions(randomBand); // Get the possibles bands name to select.
+    console.log("bandOptions: ",bandOptions)
+
     const response = await fetch(
       `https://api.deezer.com/search?q=${encodeURIComponent(randomBand)}`,
     );
@@ -39,9 +43,13 @@ router.get("/", async (req, res) => {
         artistName: track.artist.name,
         duration: track.duration,
       }));
-    res.status(200).json(tracks);
+    res.status(200).json({
+      correctBand: randomBand,
+      bandOptions,
+      tracks,
+    });
   } catch (error) {
-    console.error("Error fetching the data from Deezer");
+    console.error("Error fetching the data from Deezer: ", error);
     res.status(500).json({
       error: "Internal server error",
     });
