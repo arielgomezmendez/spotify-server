@@ -1,18 +1,20 @@
 const bands = require("../data/bands");
 
-//Generate 4 possibles band names to select
-const generateBandOptions = (randomBand) => {
-  const randomBands = [];
-  for (let i = 0; i < 3; i++) {
+// Generate 4 possible band names to select
+const generateBandOptions = (correctBand) => {
+  const bandOptions = new Set(); // Cereate a Set  to avoid duplicates bands
+
+  // Add the correct answer first
+  bandOptions.add(correctBand);
+
+  // Add random bands until there are 4 unique options
+  while (bandOptions.size < 4) {
     const randomBandOption = bands[Math.floor(Math.random() * bands.length)];
-    randomBands.push(randomBandOption);
+    bandOptions.add(randomBandOption);
   }
-  const bandOptions = [...randomBands];
-  const randomIndex = Math.floor(Math.random() * (bandOptions.length + 1));
-  console.log(randomBands)
-  bandOptions.splice(randomIndex, 0, randomBand);
-  return bandOptions
-  
+
+  // Convert Set to array and throw in.
+  return Array.from(bandOptions).sort(() => Math.random() - 0.5);
 };
 
-module.exports = {generateBandOptions};
+module.exports = { generateBandOptions };

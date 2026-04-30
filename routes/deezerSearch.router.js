@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
   try {
     const randomBand = bands[Math.floor(Math.random() * bands.length)]; //Get a random band name.
     const bandOptions = generateBandOptions(randomBand); // Get the possibles bands name to select.
-    console.log("bandOptions: ",bandOptions)
 
     const response = await fetch(
       `https://api.deezer.com/search?q=${encodeURIComponent(randomBand)}`,
@@ -27,12 +26,12 @@ router.get("/", async (req, res) => {
       return res.status(500).json({ error: "Invalid response from Deezer" });
     }
     //Filter the tracks with preview prop and get a new clean array of tracks.
-    // Filter the bands name to get the expected name
+    // Filter the bands name to get the expected name.
+    const expectedBand = normalizeText(randomBand);
     const tracks = data.data
       .filter((track) => {
         const hasPreview = !!track.preview;
         const artistName = normalizeText(track?.artist?.name || "");
-        const expectedBand = normalizeText(randomBand);
 
         return hasPreview && artistName === expectedBand;
       })
@@ -45,6 +44,7 @@ router.get("/", async (req, res) => {
       }));
     res.status(200).json({
       correctBand: randomBand,
+      expectedBand,
       bandOptions,
       tracks,
     });
